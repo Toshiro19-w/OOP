@@ -26,7 +26,7 @@ public:
     void run();
     void initializeSDL();
     void createBoard();
-    void handleEvents();
+    void handleEvents(); // xử lý sự kiện
     void update(float deltaTime);
     void render();
     void cleanup();
