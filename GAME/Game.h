@@ -10,20 +10,20 @@
 // Lớp Game chính
 class Game {
 public:
+    Game();
+    ~Game();
+    void run();
+
+private:
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Texture* houseTexture; 
     std::vector<Player> players;
     int currentPlayerIndex;
     std::vector<Tile> board;
-    SDL_Texture* loadTexture(const std::string& path, SDL_Renderer* renderer);
-
-    // Danh sách sự kiện cơ hội và khí vận
     std::vector<std::function<void(Player&)>> chanceEvents;
     std::vector<std::function<void(Player&)>> communityChestEvents;
-    Game();
-    ~Game();
-    void run();
+
     void initializeSDL();
     void createBoard();
     void handleEvents(); // xử lý sự kiện
@@ -34,6 +34,7 @@ public:
     int rollDice();
     void buyHouse(Player& player, Tile& tile);
     void renderHouse(SDL_Renderer* renderer, SDL_Texture* houseTexture, int x, int y);
+    SDL_Texture* loadTexture(const std::string& path, SDL_Renderer* renderer);
 };
 
 #endif
