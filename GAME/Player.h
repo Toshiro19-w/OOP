@@ -19,21 +19,21 @@ public:
     bool canBuyHouse(Tile& tile);
 
     // Các phương thức getter và setter
-    int getCurrentRoll() const;
-    int getMoney() const;
-    void setMoney(int amount);
-    int getPosition() const;
-    void setPosition(int pos);
-    bool getIsMoving() const;
-    void setIsMoving(bool moving);
-    bool getCanRollDice() const;
-    void setCanRollDice(bool canRoll);
-    bool getIsInJail() const;
-    void setIsInJail(bool inJail);
-    int getTurnsInJail() const;
-    void setTurnsInJail(int turns);
+    // int getCurrentRoll() const;
+    // int getMoney() const;
+    // void setMoney(int amount);
+    // int getPosition() const;
+    // void setPosition(int pos);
+    // bool getIsMoving() const;
+    // void setIsMoving(bool moving);
+    // bool getCanRollDice() const;
+    // void setCanRollDice(bool canRoll);
+    // bool getIsInJail() const;
+    // void setIsInJail(bool inJail);
+    // int getTurnsInJail() const;
+    // void setTurnsInJail(int turns);
 
-private:
+//private:
     std::vector<int> rollHistory;
     int previousRoll;
     int currentRoll;
