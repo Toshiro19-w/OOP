@@ -3,17 +3,25 @@
 #include <iostream>
 #include <cmath>
 
-Player::Player() : money(1500), position(0), isMoving(false), x(0), y(0), targetX(0), targetY(0), canRollDice(true), isInJail(false), turnsInJail(0), previousRoll(0), currentRoll(0), jailTurns(0) {}
-
 void Player::addRoll(int roll) {
     rollHistory.push_back(roll);
 }
 
-bool Player::canBuyHouse(Tile& tile) {
-    // Kiểm tra nếu người chơi sở hữu ô đất và ô đất chưa có số lượng nhà tối đa
-    return find(properties.begin(), properties.end(), &tile) != properties.end() && tile.numHouses < tile.maxHouses;
+void Player::addProperty(Tile* tile) {
+    properties.push_back(tile);
 }
 
+int Player::countHouses() const {
+    int totalHouses = 0;
+    for (const auto& property : properties) {
+        totalHouses += property->numHouses;
+    }
+    return totalHouses;
+}
+
+bool Player::canBuyHouse(const Tile& tile) const {
+    return tile.type == NORMAL && tile.numHouses < tile.maxHouses;
+}
 
 void Player::printRollHistory() const {
     for (int roll : rollHistory) {
@@ -23,41 +31,73 @@ void Player::printRollHistory() const {
 }
 
 int Player::calculateNewPosition(int steps) const {
-    int newPosition = (position + steps + 40) % 40; // NUM_TILES = 40
-    return newPosition;
+    return (position + steps + 40) % 40; // Bàn cờ có 40 ô
 }
 
-void Player::move(int steps, const std::vector<Tile>& board) {
+void Player::move(int steps, std::vector<Tile>& board){
+    if (canRollDice) {
+        if (board[position].type == GO_TO_JAIL) {
+            position = 10; // Di chuyển thẳng vào tù
+            updateTargetPosition();
+            isInJail = true;
+            turnsInJail = 3; // Người chơi sẽ bị kẹt trong tù 3 lượt
+            canRollDice = false;
+            isMoving = false;
+        }
 
-    if (canRollDice) { // Kiểm tra nếu người chơi có thể tung xúc xắc
-        if (isInJail) { // Kiểm tra nếu người chơi đang ở trong tù
+        if (isInJail) {
+            std::cout << "--------------------------------" << std::endl;
             std::cout << "You are in jail! ";
             if (turnsInJail > 0) {
                 std::cout << "Skipping this turn." << std::endl;
-                turnsInJail--;  // Giảm số lượt trong tù
-                canRollDice = false; // Người chơi đã hoàn thành lượt, không cho phép tung xúc xắc nữa
+                canRollDice = false;
                 return;
             }
             else {
-                std::cout << "You are released from jail!" << std::endl;
-                isInJail = false;  // Ra khỏi tù
-                turnsInJail = 0;   // Đặt lại số lượt trong tù
-                // Sau khi ra khỏi tù, người chơi được phép di chuyển
+                std::cout << name << " is released from jail!" << std::endl;
+                isInJail = false;
+                turnsInJail = 0;
             }
         }
 
-        // Nếu người chơi không ở trong tù hoặc đã được thả, họ di chuyển
-        int newPosition = calculateNewPosition(steps);
+        // Lấy ô hiện tại và loại bỏ người chơi khỏi ô đó
+        Tile& oldTile = board[position];
+        oldTile.removePlayer(this);
+
+        // Di chuyển người chơi đến vị trí mới
+        int newPosition = (position + steps) % board.size();
         position = newPosition;
+        Tile& targetTile = board[newPosition];
+        setTargetPosition(targetTile.x, targetTile.y);
         updateTargetPosition();
         isMoving = true;
-        canRollDice = false;  // Chặn người chơi tung xúc xắc thêm
+        canRollDice = false;
 
-        // Kích hoạt sự kiện ở ô mới nếu có
+        // Thêm người chơi vào ô mới
+        Tile& newTile = board[position];
+        newTile.addPlayer(this);
+
+        // Kích hoạt sự kiện trên ô mới nếu có
         if (board[position].event) {
             board[position].event(*this);
         }
     }
+}
+
+void Player::displayInfo() const {
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "Player: " << name << std::endl;
+    std::cout << "Money: $" << money << std::endl;
+    std::cout << "Position on board: " << position << std::endl;
+    std::cout << "Number of houses owned: " << countHouses() << std::endl;
+    std::cout << "In Jail: " << (isInJail ? "Yes" : "No") << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+}
+
+void Player::setTargetPosition(float x, float y) {
+    targetX = x;
+    targetY = y;
+    isMoving = true;
 }
 
 void Player::updateTargetPosition() {
@@ -79,7 +119,7 @@ void Player::updateTargetPosition() {
     }
 }
 
-void Player::updatePosition(float deltaTime) {
+void Player::updatePosition(float deltaTime, const std::vector<Player>& otherPlayers) {
     if (isMoving) {
         float dx = targetX - x;
         float dy = targetY - y;
@@ -90,10 +130,22 @@ void Player::updatePosition(float deltaTime) {
             y = targetY;
             isMoving = false;
             canRollDice = true;
+
+            // Kiểm tra va chạm với người chơi khác và điều chỉnh vị trí nếu cần
+            for (const Player& other : otherPlayers) {
+                if (&other != this && other.x == x && other.y == y) {
+                    x += TILE_SIZE * 0.1f;  // Điều chỉnh x để không bị trùng vị trí
+                    y += TILE_SIZE * 0.1f;  // Điều chỉnh y để không bị trùng vị trí
+                }
+            }
         }
         else {
             x += dx / distance * PLAYER_SPEED * deltaTime;
             y += dy / distance * PLAYER_SPEED * deltaTime;
         }
     }
+}
+
+bool Player::hasReachedTarget() const {
+    return (x == targetX && y == targetY);
 }

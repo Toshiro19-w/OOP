@@ -1,40 +1,56 @@
 ﻿#ifndef GAME_H
 #define GAME_H
 
+#include "Player.h"
+#include "Constants.h"
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <vector>
-#include "Player.h"
-#include "Tile.h"
+#include <string>
+#include <functional>
 
-// Lớp Game chính
 class Game {
 public:
-    Game();
+    Game(const std::vector<std::string>& playerNames);
     ~Game();
+
     void run();
 
-//private:
+private:
+    void initializeSDL();
+    void createBoard();
+    void initPlayers();
+    void cleanup();
+    void handleEvents();
+    void update(float deltaTime);
+    void render();
+    void renderText(const std::string& message, int x, int y, SDL_Color color);
+    void renderHouse(SDL_Renderer* renderer, SDL_Texture* houseTexture, int x, int y);
+    void drawPlayer(SDL_Texture* texture, int x, int y);
+    void renderPlayerAt(Player* player, int x, int y);
+    void renderPlayers();
+    int rollDice();
+    void tryToLeaveJail(Player& player);
+    void nextTurn();
+    bool rolledDoubles();
+    bool paidFee(Player& player, int jailFee);
+    SDL_Texture* loadTexture(const std::string& path, SDL_Renderer* renderer);
+
+    // Các phương thức mua
+    void buyHouse(Player& player, Tile& tile);
+    void buyBeach(Player& player, Tile& tile);
+
+    // Thành viên
     SDL_Window* window;
     SDL_Renderer* renderer;
-    SDL_Texture* houseTexture; 
+    TTF_Font* font;
+    SDL_Texture* houseTexture;
     std::vector<Player> players;
-    int currentPlayerIndex;
     std::vector<Tile> board;
     std::vector<std::function<void(Player&)>> chanceEvents;
     std::vector<std::function<void(Player&)>> communityChestEvents;
-
-    void initializeSDL();
-    void createBoard();
-    void handleEvents(); // xử lý sự kiện
-    void update(float deltaTime);
-    void render();
-    void cleanup();
-    void nextTurn();
-    int rollDice();
-    void buyHouse(Player& player, Tile& tile);
-    void renderHouse(SDL_Renderer* renderer, SDL_Texture* houseTexture, int x, int y);
-    SDL_Texture* loadTexture(const std::string& path, SDL_Renderer* renderer);
+    int currentPlayerIndex;
 };
 
-#endif
+#endif  // GAME_H

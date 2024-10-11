@@ -6,34 +6,54 @@
 #include "Tile.h"
 
 class Player {
+private:
+    SDL_Texture* sprite;
+    float x, y; // Vị trí hiện tại
 public:
-    Player();
-    
+    // Constructor mặc định
+    Player()
+        : sprite(nullptr), x(0), y(0), previousRoll(0), currentRoll(0),
+        money(1500), position(0), isMoving(false), targetX(0), targetY(0),
+        canRollDice(true), isInJail(false), turnsInJail(0), jailTurns(0) {}
+
+    // Constructor có tham số
+    Player(const std::string& playerName, int initialMoney)
+        : name(playerName), money(initialMoney), sprite(nullptr), x(0), y(0),
+        previousRoll(0), currentRoll(0), position(0), isMoving(false),
+        targetX(0), targetY(0), canRollDice(true), isInJail(false),
+        turnsInJail(0), jailTurns(0) {}
+
     // Các phương thức công khai
     void addRoll(int roll);
     void printRollHistory() const;
     int calculateNewPosition(int steps) const;
-    void move(int steps, const std::vector<Tile>& board);
+    void move(int steps, std::vector<Tile>& board);
+    void setTargetPosition(float x, float y);
     void updateTargetPosition();
-    void updatePosition(float deltaTime);
-    bool canBuyHouse(Tile& tile);
+    void updatePosition(float deltaTime, const std::vector<Player>& otherPlayers);
+    bool canBuyHouse(const Tile& tile) const;
+    void displayInfo() const;
+    void addProperty(Tile* tile);
+    int countHouses() const;
+    void goToJail() {
+        isInJail = true;
+        turnsInJail = 3;  // Stay in jail for 3 turns by default
+    }
+    void releaseFromJail() {
+        isInJail = false;
+        turnsInJail = 0;
+    }
+    SDL_Texture* getSprite() const {
+        return sprite;
+    }
+    void setSprite(SDL_Texture* texture) {
+        sprite = texture;
+    }
+    float getX() const { return x; }
+    float getY() const { return y; }
 
-    // Các phương thức getter và setter
-    // int getCurrentRoll() const;
-    // int getMoney() const;
-    // void setMoney(int amount);
-    // int getPosition() const;
-    // void setPosition(int pos);
-    // bool getIsMoving() const;
-    // void setIsMoving(bool moving);
-    // bool getCanRollDice() const;
-    // void setCanRollDice(bool canRoll);
-    // bool getIsInJail() const;
-    // void setIsInJail(bool inJail);
-    // int getTurnsInJail() const;
-    // void setTurnsInJail(int turns);
-
-//private:
+    // Các thành viên private
+    std::string name;
     std::vector<int> rollHistory;
     int previousRoll;
     int currentRoll;
@@ -41,12 +61,12 @@ public:
     std::vector<Tile*> properties;
     int position;
     bool isMoving;
-    float x, y; // Vị trí hiện tại
     float targetX, targetY; // vị trí mục tiêu
     bool canRollDice;
     bool isInJail;
     int turnsInJail;
     int jailTurns;  // Số lượt người chơi bị giam
+    bool hasReachedTarget() const;
 };
 
 #endif
