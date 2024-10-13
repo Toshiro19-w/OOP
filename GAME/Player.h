@@ -5,6 +5,8 @@
 #include <string>
 #include "Tile.h"
 
+enum class PlayerState { Normal, InJail, Bankrupt };
+
 class Player {
 private:
     SDL_Texture* sprite;
@@ -19,9 +21,9 @@ public:
     // Constructor có tham số
     Player(const std::string& playerName, int initialMoney)
         : name(playerName), money(initialMoney), sprite(nullptr), x(0), y(0),
-        previousRoll(0), currentRoll(0), position(0), isMoving(false),
+        previousRoll(0), currentRoll(0), position(0), state(PlayerState::Normal), isMoving(false),
         targetX(0), targetY(0), canRollDice(true), isInJail(false),
-        turnsInJail(0), jailTurns(0) {}
+        turnsInJail(0), jailTurns(0) , hasGetOutOfJailFreeCard (false){}
 
     // Các phương thức công khai
     void addRoll(int roll);
@@ -35,6 +37,9 @@ public:
     void displayInfo() const;
     void addProperty(Tile* tile);
     int countHouses() const;
+    /*void takeTurn();
+    void handleJailTurn();
+    void attemptRollDoubles();*/
     void goToJail() {
         isInJail = true;
         turnsInJail = 3;  // Stay in jail for 3 turns by default
@@ -60,6 +65,7 @@ public:
     int money;
     std::vector<Tile*> properties;
     int position;
+    PlayerState state;        // Trạng thái của người chơi
     bool isMoving;
     float targetX, targetY; // vị trí mục tiêu
     bool canRollDice;
@@ -67,6 +73,7 @@ public:
     int turnsInJail;
     int jailTurns;  // Số lượt người chơi bị giam
     bool hasReachedTarget() const;
+    bool hasGetOutOfJailFreeCard;  // Người chơi có thẻ "Ra tù miễn phí"
 };
 
 #endif

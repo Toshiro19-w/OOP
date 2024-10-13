@@ -32,5 +32,12 @@ const int MAX_TURNS_IN_JAIL = 3;
 // Phí ra tù
 const int JAIL_FEE = 200;
 
+// Ô tù
+const int JAIL_POSITION = 10;
+
+// Phí mua bãi biển
+const int BEACH_COST = 200;
+
+
 #endif
 

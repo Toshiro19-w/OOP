@@ -3,11 +3,14 @@
 
 #include <SDL.h>
 #include <string>
+#include <vector>
 #include <functional>
+#include <algorithm> 
 
-class Player; // Forward declaration
+class Player;  // Forward declaration
 
-enum TileType {
+enum class TileType {
+    GO,
     NORMAL,
     START,
     JAIL,
@@ -15,7 +18,9 @@ enum TileType {
     BEACH,
     COMMUNITY_CHEST,
     FREE_PARKING,
-    GO_TO_JAIL
+    GO_TO_JAIL,
+    INCOME_TAX,
+    LUXURY_TAX
 };
 
 // Cấu trúc ô cho cờ tỷ phú
@@ -31,14 +36,16 @@ struct Tile {
     std::function<void(Player&)> event;  // Sự kiện xảy ra khi người chơi đến ô này
 
     // Constructor mặc định
-   // Constructor mặc định
-    Tile()
-        : name(""), housePrice(0), numHouses(0), type(NORMAL), maxHouses(4), isOwned(false), event(nullptr), x(0), y(0) {}
+    explicit Tile()
+        : name(""), housePrice(0), numHouses(0), type(TileType::NORMAL), maxHouses(4), isOwned(false), event(nullptr), x(0), y(0) {}
 
-    // Constructor tùy chỉnh
-    Tile(std::string name, int price, int numHouses, TileType t, int maxH = 4, bool isOwned = false, std::function<void(Player&)> event = nullptr, int xCoord = 0, int yCoord = 0)
+    // Constructor tùy chỉnh (no default values here)
+    explicit Tile(const std::string& name, int price, int numHouses, TileType t, int maxH, bool isOwned, std::function<void(Player&)> event, int xCoord, int yCoord)
         : name(name), housePrice(price), numHouses(numHouses), type(t), maxHouses(maxH), isOwned(isOwned), event(event), x(xCoord), y(yCoord) {}
 
+    // Constructor with fewer parameters (with some default values)
+    explicit Tile(const std::string& name, TileType t, int xCoord = 0, int yCoord = 0)
+        : name(name), housePrice(0), numHouses(0), type(t), maxHouses(4), isOwned(false), event(nullptr), x(xCoord), y(yCoord) {}
 
     // Thêm người chơi vào ô
     void addPlayer(Player* player) {
@@ -51,5 +58,5 @@ struct Tile {
     }
 };
 
+#endif // TILE_H
 
-#endif

@@ -1,5 +1,7 @@
 ﻿#include "Player.h"
 #include "Constants.h"
+#include "Game.h"
+#include "Board.h"
 #include <iostream>
 #include <cmath>
 
@@ -20,7 +22,7 @@ int Player::countHouses() const {
 }
 
 bool Player::canBuyHouse(const Tile& tile) const {
-    return tile.type == NORMAL && tile.numHouses < tile.maxHouses;
+    return tile.type == TileType::NORMAL && tile.numHouses < tile.maxHouses;
 }
 
 void Player::printRollHistory() const {
@@ -36,7 +38,7 @@ int Player::calculateNewPosition(int steps) const {
 
 void Player::move(int steps, std::vector<Tile>& board){
     if (canRollDice) {
-        if (board[position].type == GO_TO_JAIL) {
+        if (board[position].type == TileType::GO_TO_JAIL) {
             position = 10; // Di chuyển thẳng vào tù
             updateTargetPosition();
             isInJail = true;
@@ -133,7 +135,12 @@ void Player::updatePosition(float deltaTime, const std::vector<Player>& otherPla
 
             // Kiểm tra va chạm với người chơi khác và điều chỉnh vị trí nếu cần
             for (const Player& other : otherPlayers) {
-                if (&other != this && other.x == x && other.y == y) {
+                
+        // Improved collision handling with margin for error
+        if (&other != this && std::abs(other.x - this->x) < TILE_SIZE * 0.1f && std::abs(other.y - this->y) < TILE_SIZE * 0.1f) {
+            this->x += TILE_SIZE * 0.1f;
+            this->y += TILE_SIZE * 0.1f;
+
                     x += TILE_SIZE * 0.1f;  // Điều chỉnh x để không bị trùng vị trí
                     y += TILE_SIZE * 0.1f;  // Điều chỉnh y để không bị trùng vị trí
                 }
