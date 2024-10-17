@@ -1,0 +1,17 @@
+﻿  Board.cpp
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(21,83): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(21,83): warning C4267:         with
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(21,83): warning C4267:         [
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(21,83): warning C4267:             _Ty=int
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(21,83): warning C4267:         ]
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(78,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(188,73): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(188,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(202,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(229,32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  GAME.cpp
+C:\Users\anhla\source\repos\GAME\GAME\GAME.cpp(443,28): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+  Generating code
+  Incremental LTCG not compatible with Address Sanitizer, build without incremental LTCG.
+  Finished generating code
+  GAME.vcxproj -> C:\Users\anhla\source\repos\GAME\x64\Release\GAME.exe
