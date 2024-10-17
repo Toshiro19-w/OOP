@@ -1,13 +1,2 @@
-﻿  GAME.cpp
-C:\Users\anhla\source\repos\GAME\GAME\Tile.h(4,10): error C1083: Cannot open include file: 'SDL.h': No such file or directory
-  (compiling source file 'GAME.cpp')
-  
-  main.cpp
-C:\Users\anhla\source\repos\GAME\GAME\Tile.h(4,10): error C1083: Cannot open include file: 'SDL.h': No such file or directory
-  (compiling source file 'main.cpp')
-  
-  Player.cpp
-C:\Users\anhla\source\repos\GAME\GAME\Tile.h(4,10): error C1083: Cannot open include file: 'SDL.h': No such file or directory
-  (compiling source file 'Player.cpp')
-  
-  Generating Code...
+﻿  main.cpp
+  GAME.vcxproj -> C:\Users\anhla\source\repos\GAME\x64\Debug\GAME.exe

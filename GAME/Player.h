@@ -1,79 +1,90 @@
 ﻿#ifndef PLAYER_H
 #define PLAYER_H
 
-#include <vector>
 #include <string>
+#include <vector>
+#include <unordered_set>
+
 #include "Tile.h"
 
-enum class PlayerState { Normal, InJail, Bankrupt };
+enum class PlayerState { Normal, Bankrupt };
 
 class Player {
 private:
-    SDL_Texture* sprite;
-    float x, y; // Vị trí hiện tại
+	SDL_Texture* sprite = nullptr;
+	float x = 0.0f, y = 0.0f; // Vị trí hiện tại
+	float targetX = 0.0f, targetY = 0.0f; // vị trí mục tiêu
+
+	std::string name;
+	std::vector<int> rollHistory;
+	int previousRoll = 0;
+	int currentRoll = 0;
+	int money;
+	std::unordered_set<Tile*> properties;
+	int position = 0;
+	PlayerState state = PlayerState::Normal;
+	bool isMoving = false;
+	bool canRollDice = true; // Kiểm tra xem người chơi có thể lăn xúc xắc không
+	int turnsOnLostIsland = 0; // Số lượt trên Lost Island
+	bool isOnLostIsland = false;  // Người chơi có đang ở trên Lost Island không
+	int worldsUsed = 0;
+	bool onWorldTour = false;
+
+	bool hasReachedTarget() const;
+
 public:
-    // Constructor mặc định
-    Player()
-        : sprite(nullptr), x(0), y(0), previousRoll(0), currentRoll(0),
-        money(1500), position(0), isMoving(false), targetX(0), targetY(0),
-        canRollDice(true), isInJail(false), turnsInJail(0), jailTurns(0) {}
+	explicit Player(const std::string& playerName, int initialMoney);
 
-    // Constructor có tham số
-    Player(const std::string& playerName, int initialMoney)
-        : name(playerName), money(initialMoney), sprite(nullptr), x(0), y(0),
-        previousRoll(0), currentRoll(0), position(0), state(PlayerState::Normal), isMoving(false),
-        targetX(0), targetY(0), canRollDice(true), isInJail(false),
-        turnsInJail(0), jailTurns(0) , hasGetOutOfJailFreeCard (false){}
+	// Getters (bỏ "get" trong tên hàm)
+	SDL_Texture* getSprite() const { return sprite; }
+	float getX() const { return x; }
+	float getY() const { return y; }
+	const std::string& getName() const { return name; }
+	int getMoney() const { return money; }
+	int getPosition() const { return position; }
+	bool getCanRollDice() const { return canRollDice; }
+	int getPreviousRoll() const { return previousRoll; }
+	int getCurrentRoll() const { return currentRoll; }
+	const std::unordered_set<Tile*>& getProperties() const { return properties; } // Trả về const reference
+	PlayerState getState() const { return state; }
+	bool getIsMoving() const { return isMoving; }
+	int getTurnsOnLostIsland() const { return turnsOnLostIsland; }
+	bool getIsOnLostIsland() const { return isOnLostIsland; }
+	int getWorldsUsed() const { return worldsUsed; }
+	bool getOnWorldTour() const { return onWorldTour; }
 
-    // Các phương thức công khai
-    void addRoll(int roll);
-    void printRollHistory() const;
-    int calculateNewPosition(int steps) const;
-    void move(int steps, std::vector<Tile>& board);
-    void setTargetPosition(float x, float y);
-    void updateTargetPosition();
-    void updatePosition(float deltaTime, const std::vector<Player>& otherPlayers);
-    bool canBuyHouse(const Tile& tile) const;
-    void displayInfo() const;
-    void addProperty(Tile* tile);
-    int countHouses() const;
-    /*void takeTurn();
-    void handleJailTurn();
-    void attemptRollDoubles();*/
-    void goToJail() {
-        isInJail = true;
-        turnsInJail = 3;  // Stay in jail for 3 turns by default
-    }
-    void releaseFromJail() {
-        isInJail = false;
-        turnsInJail = 0;
-    }
-    SDL_Texture* getSprite() const {
-        return sprite;
-    }
-    void setSprite(SDL_Texture* texture) {
-        sprite = texture;
-    }
-    float getX() const { return x; }
-    float getY() const { return y; }
+	// Setters (bỏ "set" trong tên hàm, sử dụng tham số với cùng tên)
+	void setX(float x) { this->x = x; }
+	void setY(float y) { this->y = y; }
+	void setTargetX(float targetX) { this->targetX = targetX; }
+	void setTargetY(float targetY) { this->targetY = targetY; }
+	void setSprite(SDL_Texture* sprite) { this->sprite = sprite; }
+	void setMoney(int money) { this->money = money; }
+	void setPosition(int position) { this->position = position; }
+	void setCanRollDice(bool canRollDice) { this->canRollDice = canRollDice; }
+	void setPreviousRoll(int previousRoll) { this->previousRoll = previousRoll; }
+	void setCurrentRoll(int currentRoll) { this->currentRoll = currentRoll; }
+	void setProperties(const std::unordered_set<Tile*>& properties) { this->properties = properties; } // Nhận const reference
+	void setState(PlayerState state) { this->state = state; }
+	void setIsMoving(bool isMoving) { this->isMoving = isMoving; }
+	void setOnWorldTour(bool onWorldTour) { this->onWorldTour = onWorldTour; }
+	void setWorldsUsed(int worldsUsed) { this->worldsUsed = worldsUsed; }
+	void setTurnsOnLostIsland(int turnsOnLostIsland) { this->turnsOnLostIsland = turnsOnLostIsland; }
+	void setIsOnLostIsland(bool isOnLostIsland) { this->isOnLostIsland = isOnLostIsland; }
 
-    // Các thành viên private
-    std::string name;
-    std::vector<int> rollHistory;
-    int previousRoll;
-    int currentRoll;
-    int money;
-    std::vector<Tile*> properties;
-    int position;
-    PlayerState state;        // Trạng thái của người chơi
-    bool isMoving;
-    float targetX, targetY; // vị trí mục tiêu
-    bool canRollDice;
-    bool isInJail;
-    int turnsInJail;
-    int jailTurns;  // Số lượt người chơi bị giam
-    bool hasReachedTarget() const;
-    bool hasGetOutOfJailFreeCard;  // Người chơi có thẻ "Ra tù miễn phí"
+	// Các phương thức công khai
+	void addRoll(int roll);
+	void printRollHistory() const;
+	int calculateNewPosition(int steps) const;
+	void move(int steps, std::vector<Tile>& board);
+	void setTargetPosition(float x, float y); // Giữ nguyên tên hàm này
+	void updateTargetPosition();
+	void updatePosition(float deltaTime, const std::vector<Player>& otherPlayers);
+	bool canBuyHouse(const Tile& tile) const;
+	void displayInfo() const;
+	void addProperty(Tile* tile);
+	int countHouses() const;
+	std::vector<Tile*> getOwnedProperties() const;
 };
 
-#endif
+#endif // PLAYER_H

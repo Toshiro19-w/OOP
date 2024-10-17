@@ -5,24 +5,44 @@
 #include <iostream>
 #include <cmath>
 
+Player::Player(const std::string& playerName, int initialMoney)
+    : name(playerName),
+    money(initialMoney),
+    sprite(nullptr),
+    x(0.0f),
+    y(0.0f),
+    targetX(0.0f),
+    targetY(0.0f),
+    previousRoll(0),
+    currentRoll(0),
+    position(0),
+    state(PlayerState::Normal),
+    isMoving(false),
+    canRollDice(true),
+    turnsOnLostIsland(0),
+    isOnLostIsland(false),
+    worldsUsed(0),
+    onWorldTour(false)
+{}
+
 void Player::addRoll(int roll) {
     rollHistory.push_back(roll);
 }
 
 void Player::addProperty(Tile* tile) {
-    properties.push_back(tile);
+    //properties.push_back(tile);
 }
 
 int Player::countHouses() const {
     int totalHouses = 0;
     for (const auto& property : properties) {
-        totalHouses += property->numHouses;
+        totalHouses += property->getNumHouses();
     }
     return totalHouses;
 }
 
 bool Player::canBuyHouse(const Tile& tile) const {
-    return tile.type == TileType::NORMAL && tile.numHouses < tile.maxHouses;
+    return tile.getTileType() == TileType::PROPERTY && tile.getNumHouses() < MAX_HOUSE;
 }
 
 void Player::printRollHistory() const {
@@ -36,32 +56,18 @@ int Player::calculateNewPosition(int steps) const {
     return (position + steps + 40) % 40; // Bàn cờ có 40 ô
 }
 
+std::vector<Tile*> Player::getOwnedProperties() const {
+    std::vector<Tile*> ownedProperties;
+    for (Tile* tile : properties) { // Duyệt qua danh sách properties của người chơi
+        if (tile->getOwnerName() == name) { // Kiểm tra nếu người chơi sở hữu ô đất
+            ownedProperties.push_back(tile);
+        }
+    }
+    return ownedProperties;
+}
+
 void Player::move(int steps, std::vector<Tile>& board){
     if (canRollDice) {
-        if (board[position].type == TileType::GO_TO_JAIL) {
-            position = 10; // Di chuyển thẳng vào tù
-            updateTargetPosition();
-            isInJail = true;
-            turnsInJail = 3; // Người chơi sẽ bị kẹt trong tù 3 lượt
-            canRollDice = false;
-            isMoving = false;
-        }
-
-        if (isInJail) {
-            std::cout << "--------------------------------" << std::endl;
-            std::cout << "You are in jail! ";
-            if (turnsInJail > 0) {
-                std::cout << "Skipping this turn." << std::endl;
-                canRollDice = false;
-                return;
-            }
-            else {
-                std::cout << name << " is released from jail!" << std::endl;
-                isInJail = false;
-                turnsInJail = 0;
-            }
-        }
-
         // Lấy ô hiện tại và loại bỏ người chơi khỏi ô đó
         Tile& oldTile = board[position];
         oldTile.removePlayer(this);
@@ -70,7 +76,7 @@ void Player::move(int steps, std::vector<Tile>& board){
         int newPosition = (position + steps) % board.size();
         position = newPosition;
         Tile& targetTile = board[newPosition];
-        setTargetPosition(targetTile.x, targetTile.y);
+        setTargetPosition(targetTile.getX(), targetTile.getY());
         updateTargetPosition();
         isMoving = true;
         canRollDice = false;
@@ -80,8 +86,8 @@ void Player::move(int steps, std::vector<Tile>& board){
         newTile.addPlayer(this);
 
         // Kích hoạt sự kiện trên ô mới nếu có
-        if (board[position].event) {
-            board[position].event(*this);
+        if (board[position].getOnLand()) {
+            //board[position].getOnLand()(*this);
         }
     }
 }
@@ -92,7 +98,6 @@ void Player::displayInfo() const {
     std::cout << "Money: $" << money << std::endl;
     std::cout << "Position on board: " << position << std::endl;
     std::cout << "Number of houses owned: " << countHouses() << std::endl;
-    std::cout << "In Jail: " << (isInJail ? "Yes" : "No") << std::endl;
     std::cout << "--------------------------------" << std::endl;
 }
 
@@ -103,21 +108,21 @@ void Player::setTargetPosition(float x, float y) {
 }
 
 void Player::updateTargetPosition() {
-    if (position < 10) {
+    if (position < 8) {
         targetX = position * TILE_SIZE;
         targetY = 0;
     }
-    else if (position < 20) {
+    else if (position < 16) {
         targetX = SCREEN_WIDTH - TILE_SIZE;
-        targetY = (position - 10) * TILE_SIZE;
+        targetY = (position - 8) * TILE_SIZE;
     }
-    else if (position < 30) {
-        targetX = SCREEN_WIDTH - (position - 20) * TILE_SIZE - TILE_SIZE;
+    else if (position < 24) {
+        targetX = SCREEN_WIDTH - (position - 16) * TILE_SIZE - TILE_SIZE;
         targetY = SCREEN_HEIGHT - TILE_SIZE;
     }
     else {
         targetX = 0;
-        targetY = SCREEN_HEIGHT - (position - 30) * TILE_SIZE - TILE_SIZE;
+        targetY = SCREEN_HEIGHT - (position - 24) * TILE_SIZE - TILE_SIZE;
     }
 }
 

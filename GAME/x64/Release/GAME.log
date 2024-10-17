@@ -1,24 +1,11 @@
 ﻿  Board.cpp
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(44,78): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(44,78): warning C4267:         with
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(44,78): warning C4267:         [
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(44,78): warning C4267:             _Ty=int
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(44,78): warning C4267:         ]
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(52,86): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(52,86): warning C4267:         with
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(52,86): warning C4267:         [
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(52,86): warning C4267:             _Ty=int
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(52,86): warning C4267:         ]
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(72,34): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(198,28): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(217,73): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(217,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(226,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  GAME.cpp
-C:\Users\anhla\source\repos\GAME\GAME\GAME.cpp(268,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating code
-  16 of 812 functions ( 2.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    6 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  GAME.vcxproj -> C:\Users\anhla\source\repos\GAME\x64\Release\GAME.exe
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(19,78): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(19,78): warning C4267:         with
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(19,78): warning C4267:         [
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(19,78): warning C4267:             _Ty=int
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(19,78): warning C4267:         ]
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(173,28): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(192,73): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(192,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\anhla\source\repos\GAME\GAME\Board.cpp(201,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+LINK : fatal error LNK1104: cannot open file 'C:\Users\anhla\source\repos\GAME\x64\Release\GAME.exe'

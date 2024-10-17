@@ -6,57 +6,98 @@
 #include <vector>
 #include <functional>
 #include <algorithm> 
+#include <unordered_set>
 
 class Player;  // Forward declaration
 
-enum class TileType {
-    GO,
-    NORMAL,
-    START,
-    JAIL,
-    CHANCE,
-    BEACH,
-    COMMUNITY_CHEST,
-    FREE_PARKING,
-    GO_TO_JAIL,
-    INCOME_TAX,
-    LUXURY_TAX
+enum class ColorGroup {
+    BROWN,
+    LIGHT_BLUE,
+    PINK,
+    ORANGE,
+    RED,
+    YELLOW,
+    GREEN,
+    DARK_BLUE,
+    NAVAJO_WHITE
 };
 
-// Cấu trúc ô cho cờ tỷ phú
-struct Tile {
-    std::string name;
-    int x, y; // Tọa độ của ô trên màn hình
-    int housePrice;
-    int numHouses;
-    int maxHouses;
-    bool isOwned;
-    TileType type;
-    std::vector<Player*> playersOnTile;  // Lưu danh sách người chơi trên ô
-    std::function<void(Player&)> event;  // Sự kiện xảy ra khi người chơi đến ô này
+enum class TileType {
+    GO,
+    PROPERTY,
+    START,
+    CHANCE,
+    BEACH,
+    WORLDS,
+    LOST_ISLAND,
+    WORLD_TOUR,
+    TAX
+};
 
-    // Constructor mặc định
-    explicit Tile()
-        : name(""), housePrice(0), numHouses(0), type(TileType::NORMAL), maxHouses(4), isOwned(false), event(nullptr), x(0), y(0) {}
+// Class ô cho cờ tỷ phú
+class Tile {
+public:
+    Tile() = default;
+    std::string getName() const { return name; }
+    void setName(const std::string& newName) { name = newName; }
 
-    // Constructor tùy chỉnh (no default values here)
-    explicit Tile(const std::string& name, int price, int numHouses, TileType t, int maxH, bool isOwned, std::function<void(Player&)> event, int xCoord, int yCoord)
-        : name(name), housePrice(price), numHouses(numHouses), type(t), maxHouses(maxH), isOwned(isOwned), event(event), x(xCoord), y(yCoord) {}
+    int getX() const { return x; }
+    int getY() const { return y; }
+    void setPosition(int newX, int newY) { x = newX; y = newY; }
 
-    // Constructor with fewer parameters (with some default values)
-    explicit Tile(const std::string& name, TileType t, int xCoord = 0, int yCoord = 0)
-        : name(name), housePrice(0), numHouses(0), type(t), maxHouses(4), isOwned(false), event(nullptr), x(xCoord), y(yCoord) {}
+    int getHousePrice() const { return housePrice; }
+    void setHousePrice(int price) { housePrice = price; }
+
+    int getNumHouses() const { return numHouses; }
+    void setNumHouses(int count) { numHouses = count; }
+
+    TileType getTileType() const { return type; }
+    void setTileType(TileType newType) { type = newType; }
+
+    std::string getOwnerName() const { return ownerName; }
+    void setOwnerName(const std::string& newOwnerName) { ownerName = newOwnerName; }
+
+    ColorGroup getColorGroup() const { return colorGroup; }
+    void setColorGroup(ColorGroup group) { colorGroup = group; }
+
+    int getValueMultiplier() const { return valueMultiplier; }
+    void setValueMultiplier(int newValueMultiplier) { valueMultiplier = newValueMultiplier; }
+
+    std::unordered_set<Player*> getPlayersOnTile() const { return playersOnTile; }
+    void setPlayersOnTile(std::unordered_set<Player*> players) { playersOnTile = players; }
+
+    std::function<void(Player*)> getOnLand() const { return onLand; }
+    void setOnLand(const std::function<void(Player*)>& newOnLand) { onLand = newOnLand; }
 
     // Thêm người chơi vào ô
     void addPlayer(Player* player) {
-        playersOnTile.push_back(player);
+        playersOnTile.insert(player);
     }
 
     // Xóa người chơi khỏi ô
     void removePlayer(Player* player) {
-        playersOnTile.erase(std::remove(playersOnTile.begin(), playersOnTile.end(), player), playersOnTile.end());
+        playersOnTile.erase(player);
     }
+private:
+    std::string name;
+    std::string ownerName;
+    int x, y;
+    int housePrice;
+    int numHouses;
+    int maxHouses;
+    int valueMultiplier;
+    TileType type;
+    ColorGroup colorGroup;
+    std::unordered_set<Player*> playersOnTile;
+    std::function<void(Player*)> onLand;
+
+    Tile(const std::string& name, int price, int numHouses, TileType t, int maxH,
+        std::function<void(Player*)> onLand, int xCoord, int yCoord, ColorGroup group,
+        const std::string& ownerName)
+        : name(name), ownerName(ownerName), x(xCoord), y(yCoord), housePrice(price), numHouses(numHouses), maxHouses(maxH),
+        valueMultiplier(1), type(t), colorGroup(group), onLand(onLand) {}
+
+    friend class TileBuilder;
 };
 
 #endif // TILE_H
-

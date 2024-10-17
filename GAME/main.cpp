@@ -3,13 +3,32 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+void displayInstructions() {
     cout << "============================= HOW TO PLAY ===============================\n";
+    cout << "Space. do xuc xac\n";
     cout << "b. mua bai bien\n";
-    cout << "i. hien thong tin cua nguoi choi hien tai\n";
     cout << "h. mua nha\n";
+    cout << "l. ban nha\n";
     cout << "=========================================================================\n";
-    std::vector<std::string> playerNames = { "Alice 1", "Bob 2", "Charlie 3", "Duck 4" };
+}
+
+int main(int argc, char* argv[]) {
+    displayInstructions();
+    int numPlayers;
+    do {
+        cout << "Nhap so luong nguoi choi (2-4): ";
+        cin >> numPlayers;
+        if (numPlayers < 2 || numPlayers > 4) cout << "So luong nguoi choi khong hop le!\n";
+    } while (numPlayers < 2 || numPlayers > 4);
+
+    std::vector<std::string> playerNames;
+    for (int i = 0; i < numPlayers; ++i) {
+        string name;
+        cout << "Nhap ten nguoi choi " << i + 1 << ": ";
+        cin >> name;
+        playerNames.push_back(name);
+    }
+
     Game game(playerNames);
     game.run();
     return 0;
