@@ -1,0 +1,451 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.41.34123.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/game/board.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "64e1b360dafb5fdcc983486074be0959c7b6855943703c3335c4fd6f4b9cd006"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/game/player.h"
+          },
+          "hashes": {
+            "sha-256": "7ff6f729f5aeed2a50b66f93c7195c029cb43c4226a2244139999a99914f5849"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/game/tile.h"
+          },
+          "hashes": {
+            "sha-256": "28bbb010a6d1c4130fa9d5f19d1d624fcb7810a1207e2370f69b12d38d5d63d2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl.h"
+          },
+          "hashes": {
+            "sha-256": "2cbc333001e7d8eb02af649547b33bd4a7907fe4e22691e4fca2a88f341d4652"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_main.h"
+          },
+          "hashes": {
+            "sha-256": "ab05d13a6a57a6930fa1d7ad506134b3fec71e6c1fbb7b5a2d47a28aef803e4d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_stdinc.h"
+          },
+          "hashes": {
+            "sha-256": "4c332b888d0f3d817bde5be1eacb84c73a4c95d0a65f54a42e083ec2406ab7b0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_config.h"
+          },
+          "hashes": {
+            "sha-256": "4557428f95e495f27ccc4916fe3500445882a7eaa55e9c12a4b66a2df06425fc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_platform.h"
+          },
+          "hashes": {
+            "sha-256": "47a303749d9951df4518a45e19d244e98c87c2a7336fdf632bdfc80d6e7d0262"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/begin_code.h"
+          },
+          "hashes": {
+            "sha-256": "250ef5cd3c00a77133236d9a04fdf0f3461811cc4d05117cff40e4a8edfda03a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/close_code.h"
+          },
+          "hashes": {
+            "sha-256": "a05d08d1d7100ef2dcb84220ab1f701108aea8747928ba2ad7384bfc02b981e8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_assert.h"
+          },
+          "hashes": {
+            "sha-256": "b6e4b5f02ec0d756a4a87f4c593d165826faabb91c17ded48b9385c0db5217f9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_atomic.h"
+          },
+          "hashes": {
+            "sha-256": "9fdac603ccd71716ac527374cad80b2d6996d820c2b4a05e18965c7c1fa77d17"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_audio.h"
+          },
+          "hashes": {
+            "sha-256": "283a244d2577919b87090145ad1ba6dd5a133f54125b6c408218dc7a8200ad76"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_error.h"
+          },
+          "hashes": {
+            "sha-256": "7abae8b28558083e3952f415ccbe0b99fab8782420f766bac54674eb60c610be"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_endian.h"
+          },
+          "hashes": {
+            "sha-256": "efb86fd1022a96b6bff2071017cd5a0303f6d7f64000d2a221a25157540af269"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_mutex.h"
+          },
+          "hashes": {
+            "sha-256": "58a53c83b6d50f72a940482f5ee506acf706e61820f8bc10060ccb4027925538"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_thread.h"
+          },
+          "hashes": {
+            "sha-256": "d7c889d721733937a2337d09c0adc63256e052accd0c8422c3764b2ebdccf974"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_rwops.h"
+          },
+          "hashes": {
+            "sha-256": "29ec25675e0527a09f2e377b1037352a5552894848b763fd777a7654426e5140"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_clipboard.h"
+          },
+          "hashes": {
+            "sha-256": "fabd0b3971c645fd90f7e164a9153a8befb5cc4cec139b165f1c4c1abb12c8a9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_cpuinfo.h"
+          },
+          "hashes": {
+            "sha-256": "304a45d2615014b86e4d5fb9b9207efaaf2d4f6cf985e112c723f51eecee2b17"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_events.h"
+          },
+          "hashes": {
+            "sha-256": "9702123eacde7ba9d5e0708768ccd909524902d1599a88bc718949918e35c0a0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_video.h"
+          },
+          "hashes": {
+            "sha-256": "ebf382abdd812109c61c12e69465f89d43677cb33b2f33e8329fa53e5618e1ec"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_pixels.h"
+          },
+          "hashes": {
+            "sha-256": "7e97330cce33ed52c95ba14cbd14f2827ca93913dd936abcf52d6409b4b67e93"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_rect.h"
+          },
+          "hashes": {
+            "sha-256": "742b197047dd99caf546e3b271602d1e79d0b3905693c970d146e7bff694c06e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_surface.h"
+          },
+          "hashes": {
+            "sha-256": "cd117f6fc6c2aa30a56676cfa2baa38655b0f5aba333d4709d57a61f2882db23"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_blendmode.h"
+          },
+          "hashes": {
+            "sha-256": "77ff01d222e1e1a15ea1a3c416a4380bac782129432422abc9b68ab870891cbe"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_keyboard.h"
+          },
+          "hashes": {
+            "sha-256": "b696461075374ca0a8cdc61fe0c03d800e5b5cd3d2c71f6baaa05a3edb60afee"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_keycode.h"
+          },
+          "hashes": {
+            "sha-256": "4a931c946f9ea663d089b8b77cdb107b594153164f24e3aee037d08e94d9620c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_scancode.h"
+          },
+          "hashes": {
+            "sha-256": "e556990bd21f32e360cf787a3899fd43f20607ff9ca729b122b8e496e096ccea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_mouse.h"
+          },
+          "hashes": {
+            "sha-256": "805307e9b073bc909f7fc17b14c5a53faa3a4f27459a25c4bb475a5a9d7aeb09"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_joystick.h"
+          },
+          "hashes": {
+            "sha-256": "c5858bf814b97fd346afb79e3febcbd240f92ba3bdf4f5e03962d3d81c767514"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_gamecontroller.h"
+          },
+          "hashes": {
+            "sha-256": "5590ecb4793f57eb598a4deadf19c30801b701f03e0681e4f65078d3a98ab715"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_quit.h"
+          },
+          "hashes": {
+            "sha-256": "98dfd3ecf8c756d55c7befe6eed216207f29f25ca52d63ee240902b1b12f8e18"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_gesture.h"
+          },
+          "hashes": {
+            "sha-256": "ff9fad390590f6b6a8a6a042131947f4294003f7d501f10122b77f5a5a5aa881"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_touch.h"
+          },
+          "hashes": {
+            "sha-256": "f6643657ddfb0c03ba3a371014c6e816b9c9122a9d93edae1c1cddbcc6149ddd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_filesystem.h"
+          },
+          "hashes": {
+            "sha-256": "9799c1bcc82500814459fdf9eca33243e13b72be06a8ef573707af034e3e5664"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_haptic.h"
+          },
+          "hashes": {
+            "sha-256": "3b8454982f4732ab2301fdb646eeb3e63f476984ec73b4b13a7cce5cf477933d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_hints.h"
+          },
+          "hashes": {
+            "sha-256": "0ea14f9815cd83d068bdd200962a6704a668e66710242acb9a1c8833f3beb6f5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_loadso.h"
+          },
+          "hashes": {
+            "sha-256": "620dcead9a45d7bb82ebd4f0a6b3f2ae99f7facbb760069a035853357007c4bc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_log.h"
+          },
+          "hashes": {
+            "sha-256": "8f8177e23be035311c1d04283db041ba08b844a40b84633ec789dd5ddb437341"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_messagebox.h"
+          },
+          "hashes": {
+            "sha-256": "0d2b834bf9c0cdf122da43b4e83129c512e3e55d7efa9d8361803d3a8bbc7b04"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_power.h"
+          },
+          "hashes": {
+            "sha-256": "5642646e9fb959de166037a6262bbc47f7a6747e0f65234fc1ea0f9b34647f13"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_render.h"
+          },
+          "hashes": {
+            "sha-256": "11888a3d7e70448716902c913a54f9f70ba20eea59eb2a74f98b0358eae1b674"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_shape.h"
+          },
+          "hashes": {
+            "sha-256": "2d5c129df641b8a2f56d6db3cb8aedd2f44f987dbf6717e63f4c41f692d510e1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_system.h"
+          },
+          "hashes": {
+            "sha-256": "dd6d19fc57706dcedd4f247ebf883a795139f1770460b4f30c63be44cc1c9897"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_timer.h"
+          },
+          "hashes": {
+            "sha-256": "e507bdda75645271dbc606c6c31932825bd529a8e17e0561c4f7a2e9d86be1cd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2-2.0.8/include/sdl_version.h"
+          },
+          "hashes": {
+            "sha-256": "177769a3d5e5bde6c84b634b275a2f1fe5bb7c6ddbcdbd3517c38a51ea9df94d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/game/board.h"
+          },
+          "hashes": {
+            "sha-256": "2855f6e2aa31f0c3e66caf625069b00d1ff7cf11fed61561c7b61409760db373"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/game/constants.h"
+          },
+          "hashes": {
+            "sha-256": "3176384d22f9d7d1bcbfbcbc39d31c371acc1eabc4278570a19a022c53fc96bf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/game/game.h"
+          },
+          "hashes": {
+            "sha-256": "db3d2f534f17d099a786c76e1d66db1d4d22aac95697472a1e11e4d9096f74fc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2_image-2.0.3/include/sdl_image.h"
+          },
+          "hashes": {
+            "sha-256": "1f26b296ae9dcfb1b063cf1958adc3ae07b2074e14cb0a0859eeac536112a125"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/libsdl2/sdl2_ttf-2.0.14/include/sdl_ttf.h"
+          },
+          "hashes": {
+            "sha-256": "03da4cf03fffe259c7626174891f12941468ba3392c6df5fd1b39a240326a64a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/anhla/source/repos/game/game/tilebuilder.h"
+          },
+          "hashes": {
+            "sha-256": "75e22ebcc818ddb592cee5e6ae996f5206be9e76d9fa24e67c6fca54145482b6"
+          }
+        }
+      ]
+    }
+  ]
+}
